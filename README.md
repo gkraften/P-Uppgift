@@ -13,3 +13,7 @@ En av de större utmaningarna kommer att vara att se till att man bara kan spela
 ### Två spelare
 
 Leo har utmanat Sofie på reversi. De öppnar programmet och möts av en meny där de väljer att spela ett spel med två spelare. En spelplan dyker upp där det står att svart börjar och eftersom de har kommit överrens om att Sofie är svart är det hon som börjar. Efter att ha spelat ett tag lägger Leo den sista brickan och fyller spelplanen. Ett meddelande dyker upp som säger att svart hade flest brickor så svart vinner. Dessutom blev det ett highscore. De klickar på "avsluta" i huvudmenyn och Sofie går sedan lyckligt iväg medan Leo sitter kvar och tjurar.
+
+## En spelare
+
+Leo bestämmer att köra en omgång mot datorn för att öva så han kan vinna mot Sofie nästa gång. Han öppnar programmet och möts av en meny där han väljer att spela en spelare. Han tillåts nu att välja färg och han väljer vit. En spelplan dyker upp på skärmen och det står att vit börjar. Efter att ha spelat ett tag tvingas både Leo och datorn att stå över en runda och spelet tar då slut. Ett meddelande dyker upp att svart har fläst brickor och vinner. I menyn väljer Leo "avsluta" och inser att han borde satsa på något annat än reversi.
