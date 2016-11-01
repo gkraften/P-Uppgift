@@ -14,6 +14,36 @@ En av de större utmaningarna kommer att vara att se till att man bara kan spela
 
 Leo har utmanat Sofie på reversi. De öppnar programmet och möts av en meny där de väljer att spela ett spel med två spelare. De väljer en spelplan av storleken 10x10 rutor. En spelplan dyker upp där det står att svart börjar och eftersom de har kommit överrens om att Sofie är svart är det hon som börjar. Efter att ha spelat ett tag lägger Leo den sista brickan och fyller spelplanen. Ett meddelande dyker upp som säger att svart hade flest brickor så svart vinner. Dessutom blev det ett highscore. De klickar på "avsluta" i huvudmenyn och Sofie går sedan lyckligt iväg medan Leo sitter kvar och tjurar.
 
-## En spelare
+### En spelare
 
 Leo bestämmer att köra en omgång mot datorn för att öva så han kan vinna mot Sofie nästa gång. Han öppnar programmet och möts av en meny där han väljer att spela en spelare. Han tillåts nu att välja färg och han väljer vit. Därefter får han välja storlek på planen och väljer 7x7 rutor. En spelplan dyker upp på skärmen och det står att vit börjar. Efter att ha spelat ett tag tvingas både Leo och datorn att stå över en runda och spelet tar då slut. Ett meddelande dyker upp att svart har flest brickor och vinner. I menyn väljer Leo "avsluta" och inser att han borde göra något annat med sitt liv.
+
+## Kodskelett
+
+```python
+'''WHITE and BLACK are constants representing the two types of pieces.
+1 and -2 were chosen because in two's complement they are eachother's
+bitwise negation which makes it easy to switch turn.'''
+WHITE = 1
+BLACK = -2
+
+class Board:
+  '''A class representing the board and what's placed on it.'''
+  
+  def __init__(self, size):
+    '''Initialize a new board of size size*size. It will be initialized
+    with two black and two white pieces placed on diagonals in the center.'''
+  
+  def nflips(self, type, row, col):
+    '''Returns how many pieces will be flipped if a piece of color type
+    is placed at row row and column col. Returns zero if no pieces are
+    flipped or if the cell at row row and column col is already occupied.'''
+    
+  def is_empty(self, row, col):
+    '''Returns whether the cell at row row and column col is empty or not'''
+    
+  def place(self, type, row, col):
+    '''Places a piece of color type at row row and column col. If the cell
+    is occupied or if no pieces are flipped an exception will be raised.
+    Returns a list of all pieces that were flipped.
+```
