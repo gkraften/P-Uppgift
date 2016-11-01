@@ -20,6 +20,7 @@ Leo bestämmer att köra en omgång mot datorn för att öva så han kan vinna m
 
 ## Kodskelett
 
+#### Klasser som representerar själva spelet.
 ```python
 '''WHITE and BLACK are constants representing the two types of pieces.
 1 and -2 were chosen because in two's complement they are eachother's
@@ -41,9 +42,34 @@ class Board:
     
   def is_empty(self, row, col):
     '''Returns whether the cell at row row and column col is empty or not'''
+  
+  def is_full(self):
+    '''Returns whether the board has been filled or not.'''
     
   def place(self, type, row, col):
     '''Places a piece of color type at row row and column col. If the cell
     is occupied or if no pieces are flipped an exception will be raised.
     Returns a list of all pieces that were flipped.
+
+class Reversi:
+  '''A class representing a game of reversi.'''
+  
+  def __init__(self, board):
+    '''Initializes a game using board board of type Board. The color that
+    starts is randomized.'''
+  
+  def set_turn(self, type):
+    '''Sets whose turn it is.'''
+  
+  def place(self, row, col):
+    '''Places a piece of same type as whose turn it currently is at row row
+    and column col. Raises the same exceptions as Board.place.'''
+  
+  def pass(self):
+    '''Lets the color whose turn it currently is to pass its turn.'''
+  
+  def winner(self):
+    '''If both players have passed their turn or if the board is full the
+    color that has most pieces is returned. If no one has won yet, None
+    is returned.'''
 ```
