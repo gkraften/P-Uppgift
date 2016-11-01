@@ -23,10 +23,10 @@ Leo bestämmer att köra en omgång mot datorn för att öva så han kan vinna m
 #### Klasser som representerar själva spelet.
 ```python
 '''WHITE and BLACK are constants representing the two types of pieces.
-1 and -2 were chosen because in two's complement they are eachother's
-bitwise negation which makes it easy to switch turn.'''
+1 and -1 were chosen because to switch turn the value just has to
+be negated.'''
 WHITE = 1
-BLACK = -2
+BLACK = -1
 
 class Board:
   '''A class representing the board and what's placed on it.'''
