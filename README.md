@@ -49,7 +49,7 @@ class Board:
   def place(self, type, row, col):
     '''Places a piece of color type at row row and column col. If the cell
     is occupied or if no pieces are flipped an exception will be raised.
-    Returns a list of all pieces that were flipped.
+    Returns a list of all pieces that were flipped.'''
 
 class Reversi:
   '''A class representing a game of reversi.'''
