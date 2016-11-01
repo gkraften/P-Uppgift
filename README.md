@@ -65,11 +65,11 @@ class Reversi:
     '''Places a piece of same type as whose turn it currently is at row row
     and column col. Raises the same exceptions as Board.place.'''
   
-  def pass(self):
-    '''Lets the color whose turn it currently is to pass its turn.'''
+  def skip(self):
+    '''Lets the color whose turn it currently is to skip its turn.'''
   
   def winner(self):
-    '''If both players have passed their turn or if the board is full the
+    '''If both players have skiped their turn or if the board is full the
     color that has most pieces is returned. If no one has won yet, None
     is returned.'''
 ```
@@ -87,6 +87,6 @@ class Bot:
   
   def play(self):
     '''Makes a move. It does not check whether it actually is the bot's turn.
-    Returns a list of all pieces that were flipped and None if it passed its
+    Returns a list of all pieces that were flipped and None if it skiped its
     turn.'''
 ```
