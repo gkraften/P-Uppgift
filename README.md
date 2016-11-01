@@ -84,4 +84,9 @@ class Bot:
   def __init__(self, game, type):
     '''Initializes the bot with the game game of type Reversi. type is the
     color that the bot plays as.'''
+  
+  def play(self):
+    '''Makes a move. It does not check whether it actually is the bot's turn.
+    Returns a list of all pieces that were flipped and None if it passed its
+    turn.'''
 ```
