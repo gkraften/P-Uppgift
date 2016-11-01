@@ -110,7 +110,7 @@ class Highscore:
   '''Class that manages the highscore, reading and writing it to disk.'''
   
   def load(self, path):
-    '''Öoad highscore from path. If an exception arises the highscore
+    '''Loads highscore from path. If an exception arises the highscore
     is set to zero and False is returned. If the highscore is read
     correctly True is returned.'''
 ```
