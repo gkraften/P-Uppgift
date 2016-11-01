@@ -69,7 +69,7 @@ class Reversi:
     '''Lets the color whose turn it currently is to skip its turn.'''
   
   def winner(self):
-    '''If both players have skiped their turn or if the board is full the
+    '''If both players have skipped their turn or if the board is full the
     color that has most pieces is returned. If no one has won yet, None
     is returned.'''
 ```
@@ -87,6 +87,18 @@ class Bot:
   
   def play(self):
     '''Makes a move. It does not check whether it actually is the bot's turn.
-    Returns a list of all pieces that were flipped and None if it skiped its
+    Returns a list of all pieces that were flipped and None if it skipped its
     turn.'''
+```
+
+#### Fel
+
+```python
+class OccupiedCellException(Exception):
+  '''Exception raised when a piece is placed on a cell that is already
+  occupied.'''
+  
+class NoFlipsException(Exception):
+  '''Exception raised when a piece is placed in a way that no pieces
+  are flipped.'''
 ```
