@@ -73,3 +73,15 @@ class Reversi:
     color that has most pieces is returned. If no one has won yet, None
     is returned.'''
 ```
+
+#### Klass som representerar en reversi-bot
+
+```python
+class Bot:
+  '''A class representing a reversi-playing bot. Can be used to play
+  one-player games.'''
+  
+  def __init__(self, game, type):
+    '''Initializes the bot with the game game of type Reversi. type is the
+    color that the bot plays as.'''
+```
