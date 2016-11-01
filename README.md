@@ -69,9 +69,9 @@ class Reversi:
     '''Lets the color whose turn it currently is to skip its turn.'''
   
   def winner(self):
-    '''If both players have skipped their turn or if the board is full the
-    color that has most pieces is returned. If no one has won yet, None
-    is returned.'''
+    '''If both players have skipped their turn or if the board is full a list
+    containing the color that has won and by how many pieces is returned. If
+    no one has won yet, None is returned.'''
 ```
 
 #### Klass som representerar en reversi-bot
