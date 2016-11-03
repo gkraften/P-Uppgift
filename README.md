@@ -103,6 +103,10 @@ class OccupiedCellException(Exception):
 class NoFlipsException(Exception):
   '''Exception raised when a piece is placed in a way that no pieces
   are flipped.'''
+  
+class WrongTurnException(Exception):
+  '''Exception raised by Bot when it tries to play when it is not
+  its turn.'''
 ```
 
 #### Highscore
