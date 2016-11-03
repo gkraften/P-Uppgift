@@ -32,7 +32,7 @@ class Board:
   '''A class representing the board and what's placed on it.'''
   
   def __init__(self, size):
-    '''Initialize a new board of size size*size. It will be initialized
+    '''Initialize a new board of dimensions size*size. It will be initialized
     with two black and two white pieces placed on diagonals in the center.'''
   
   def nflips(self, type, row, col):
