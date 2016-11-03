@@ -36,9 +36,9 @@ class Board:
     with two black and two white pieces placed on diagonals in the center.'''
   
   def nflips(self, type, row, col):
-    '''Returns how many pieces will be flipped if a piece of color type
-    is placed at row row and column col. Returns zero if no pieces are
-    flipped or if the cell at row row and column col is already occupied.'''
+    '''Returns how many pieces would be flipped if a piece of color type
+    were to be placed at row row and column col. Returns zero if no pieces would
+    be flipped or if the cell at row row and column col is already occupied.'''
     
   def is_empty(self, row, col):
     '''Returns whether the cell at row row and column col is empty or not'''
@@ -48,8 +48,9 @@ class Board:
     
   def place(self, type, row, col):
     '''Places a piece of color type at row row and column col. If the cell
-    is occupied or if no pieces are flipped an exception will be raised.
-    Returns a list of all pieces that were flipped.'''
+    is occupied, no pieces are flipped or if the cell lies outside of the board
+    an exception will be raised. Returns a list with the positions of all
+    pieces that were flipped.'''
 
 class Reversi:
   '''A class representing a game of reversi.'''
@@ -63,7 +64,8 @@ class Reversi:
   
   def place(self, row, col):
     '''Places a piece of same type as whose turn it currently is at row row
-    and column col. Raises the same exceptions as Board.place.'''
+    and column col. Raises the same exceptions as Board.place. Returns a
+    list with the positions of all pieces that were flipped.'''
   
   def skip(self):
     '''Lets the color whose turn it currently is to skip its turn.'''
@@ -86,7 +88,7 @@ class Bot:
     color that the bot plays as.'''
   
   def play(self):
-    '''Makes a move. It does not check whether it actually is the bot's turn.
+    '''Makes a move. Raises an exception if it is not the bot's turn.
     Returns a list of all pieces that were flipped and None if it skipped its
     turn.'''
 ```
