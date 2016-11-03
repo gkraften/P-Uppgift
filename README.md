@@ -131,3 +131,6 @@ def set_highscore(score):
 def save(path):
   '''Writes the highscore to path.'''
 ```
+## Programflöde och dataflöde
+
+Programmet börjar med att ett fönster görs i ordning och kontroll över grafik och input ges till en klass som ansvarar för huvudmenyn. En meny ritas upp med alternativen "En spelare", "Två spelare" och "Avsluta". Väljs "En spelare" lämnas kontroll över grafik och input över till en klass som visar en meny där man tillåts välja färg. När man valt färg eller om man valt "Två spelare" i huvudmenyn lämnas kontrollen över till en klass som visar en meny där man får välja storlek på brädet. Slutligen lämnas kontrollen över till en klass som har han om själva spelet. Den instansierar ett objekt av Board och ett objekt av Reversi. Har man valt att spela en spelare instansieras även en Bot. Klassen låter spelaren/na placera sin brickor och låter boten spela. När spelet är slut läser den in highscore och uppdaterar den vid behov. Highscoren sparas och kontroll lämnas över till huvudmenyn.
