@@ -112,11 +112,22 @@ class WrongTurnException(Exception):
 #### Highscore
 
 ```python
-class Highscore:
-  '''Class that manages the highscore, reading and writing it to disk.'''
+def load(path):
+  '''Loads highscore from path. If en exception occurs, the highscore
+  is set to zero and False is returned. If it is loaded correctly True
+  is returned. If the highscore has already been loaded it will be
+  overwritten in memory.'''
   
-  def load(self, path):
-    '''Loads highscore from path. If an exception arises the highscore
-    is set to zero and False is returned. If the highscore is read
-    correctly True is returned.'''
+def has_loaded():
+  '''Returns whether the highscore has already been loaded.'''
+
+def get_highscore():
+  '''Returns the highscore or None if it hasn't been loaded yet.'''
+  
+def set_highscore(score):
+  '''Sets highscore. Does not check if it is higher than the loaded
+  one.'''
+
+def save(path):
+  '''Writes the highscore to path.'''
 ```
