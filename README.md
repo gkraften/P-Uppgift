@@ -48,7 +48,7 @@ class Board:
     
   def place(self, type, row, col):
     '''Places a piece of color type at row row and column col. If the cell
-    is occupied, no pieces are flipped or if the cell lies outside of the board
+    is occupied or if no pieces are flipped or if the cell lies outside of the board
     an exception will be raised. Returns a list with the positions of all
     pieces that were flipped.'''
 
