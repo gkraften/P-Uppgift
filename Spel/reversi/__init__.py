@@ -40,6 +40,13 @@ class Board:
 
         self.n_pieces = {WHITE: 2, BLACK: 2, "total": 4}
 
+    def get_board_list(self):
+        '''Returns the underlying 2-dimensional list
+        that represents the board. The returned list
+        should not be modified.'''
+
+        return self.board
+
     def is_empty(self, row, col):
         '''Returns whether the cell at row row and column col is empty or not'''
 
