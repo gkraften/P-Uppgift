@@ -81,7 +81,7 @@ class Board:
                 candidates.append(pos)
                 pos = (pos[0] + direction[0], pos[1] + direction[1])
 
-            if self.board[pos[0]][pos[1]] == type:
+            if 0 <= pos[0] <= self.size-1 and 0 <= pos[1] <= self.size-1:
                 flipped += candidates
 
         return flipped
@@ -181,7 +181,7 @@ class Reversi:
             if n_black == n_white: # A draw
                 return [0]
             else:
-                winner = n_black if n_black > n_white else n_white
+                winner = BLACK if n_black > n_white else WHITE
                 return [winner, abs(n_black - n_white)]
         else:
             return None
