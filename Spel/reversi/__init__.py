@@ -38,7 +38,7 @@ class Board:
         self.board[size//2 - 1][size//2] = BLACK
         self.board[size//2][size//2 - 1] = BLACK
 
-        self.left = size*size - 4 #Number of empty cells
+        self.n_pieces = {WHITE: 2, BLACK: 2, "total": 4}
 
     def is_empty(self, row, col):
         '''Returns whether the cell at row row and column col is empty or not'''
@@ -48,7 +48,7 @@ class Board:
     def is_full(self):
         '''Returns whether the board has been filled or not.'''
 
-        return self.left == 0
+        return self.size**2 - self.n_pieces["total"] == 0
 
     def flips(self, type, row, col):
         '''Returns a list containing the positions of all pieces that would
@@ -105,9 +105,20 @@ class Board:
         self.board[row][col] = type
         for flip in flipped:
             self.board[flip[0]][flip[1]] = type
-        self.left -= 1
+        self.n_pieces["total"] += 1
+        self.n_pieces[type] += 1
 
         return flipped
+
+    def get_n_white(self):
+        '''Returns the number of white pieces on the board.'''
+
+        return self.n_pieces[WHITE]
+
+    def get_n_black(self):
+        '''Returns the number of black pieces on the board.'''
+
+        return self.n_pieces[BLACK]
 
 
 
@@ -128,6 +139,11 @@ class Reversi:
 
         self.turn = type
 
+    def get_turn(self):
+        '''Returns whose turn it is.'''
+
+        return self.turn
+
     def place(self, row, col):
         '''Places a piece of same type as whose turn it currently is at row row
         and column col. Raises the same exceptions as Board.place. Returns a
@@ -144,3 +160,21 @@ class Reversi:
 
         self.skipped[self.turn] = True
         self.turn *= -1
+
+    def winner(self):
+        '''If both players have skipped their turn or if the board is full a list
+        containing the color that has won and by how many pieces is returned. If
+        there is a draw a list containing a 0 is returned. If no one has won yet,
+        None is returned.'''
+
+        if self.board.is_full() or (self.skipped[BLACK] and self.skipped[WHITE]): #There is a winner
+            n_black = self.board.get_n_black()
+            n_white = self.board.get_n_white()
+
+            if n_black == n_white: # A draw
+                return [0]
+            else:
+                winner = n_black if n_black > n_white else n_white
+                return [winner, abs(n_black - n_white)]
+        else:
+            return None
