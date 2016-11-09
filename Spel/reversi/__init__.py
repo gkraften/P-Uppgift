@@ -113,7 +113,8 @@ class Board:
         for flip in flipped:
             self.board[flip[0]][flip[1]] = type
         self.n_pieces["total"] += 1
-        self.n_pieces[type] += 1
+        self.n_pieces[type] += 1 + len(flipped)
+        self.n_pieces[-type] -= len(flipped)
 
         return flipped
 
