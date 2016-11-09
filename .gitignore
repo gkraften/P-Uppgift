@@ -90,3 +90,6 @@ ENV/
 
 # PyCharm
 .idea/
+
+# High score
+highscore.txt
