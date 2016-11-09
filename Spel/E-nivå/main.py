@@ -30,40 +30,44 @@ print(r''' _______  _______           _______  _______  _______ _________
 
 print("Välkommen till Reversi av Oscar Gustavsson!")
 print("Utmana en kompis i reversi.")
+print("Tryck ctrl+C för att avsluta.")
 print()
 
-size = int(input("Skriv storleken på brädet (måste vara delbart med två och ligga mellan 4 och 26): "))
-print()
+try:
+    size = int(input("Skriv storleken på brädet (måste vara delbart med två och ligga mellan 4 och 26): "))
+    print()
 
-board = reversi.Board(size)
-game = reversi.Reversi(board)
+    board = reversi.Board(size)
+    game = reversi.Reversi(board)
 
-winner = None
-while not winner:
-    interface.display_board(board)
+    winner = None
+    while not winner:
+        interface.display_board(board)
 
-    print("Nu ska %s spela!" % colors[game.get_turn()])
-    row, col = interface.get_row_col()
+        print("Nu ska %s spela!" % colors[game.get_turn()])
+        row, col = interface.get_row_col()
 
-    if row is None:
-        game.skip()
+        if row is None:
+            game.skip()
+        else:
+            game.place(row, col)
+
+        winner = game.winner()
+
+        print("\n")
+
+    if len(winner) == 1:
+        print("Det blev lika!")
     else:
-        game.place(row, col)
+        print("Vinnaren är %s som vann med %d pjäser!" % (colors[winner[0]], winner[1]))
 
-    winner = game.winner()
+        score_path = os.path.dirname(os.path.realpath(__file__)) + os.sep + "highscore.txt" # Path to high score file. Same directory as script
+        Highscore.load(score_path)
 
-    print("\n")
+        if winner[1] > Highscore.get_highscore():
+            print("Nytt high score dessutom!!")
 
-if len(winner) == 1:
-    print("Det blev lika!")
-else:
-    print("Vinnaren är %s som vann med %d pjäser!" % (colors[winner[0]], winner[1]))
-
-    score_path = os.path.dirname(os.path.realpath(__file__)) + os.sep + "highscore.txt" # Path to high score file. Same directory as script
-    Highscore.load(score_path)
-
-    if winner[1] > Highscore.get_highscore():
-        print("Nytt high score dessutom!!")
-
-        Highscore.set_highscore(winner[1])
-        Highscore.save(score_path)
+            Highscore.set_highscore(winner[1])
+            Highscore.save(score_path)
+except KeyboardInterrupt:
+    print("\nHejdå!")
