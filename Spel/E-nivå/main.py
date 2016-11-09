@@ -11,6 +11,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)) + os.sep + "..")
 # Här börjar själva programmet
 
 import reversi
+from reversi.highscore import Highscore
 import interface
 
 
@@ -57,3 +58,12 @@ if len(winner) == 1:
     print("Det blev lika!")
 else:
     print("Vinnaren är %s som vann med %d pjäser!" % (colors[winner[0]], winner[1]))
+
+    score_path = os.path.dirname(os.path.realpath(__file__)) + os.sep + "highscore.txt" # Path to high score file. Same directory as script
+    Highscore.load(score_path)
+
+    if winner[1] > Highscore.get_highscore():
+        print("Nytt high score dessutom!!")
+
+        Highscore.set_highscore(winner[1])
+        Highscore.save(score_path)

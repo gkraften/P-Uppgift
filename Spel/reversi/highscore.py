@@ -10,7 +10,7 @@ class Highscore:
         overwritten in memory.'''
 
         try:
-            with open(path, "r") as file
+            with open(path, "r") as file:
                 cls._highscore = int(file.readline())
 
             cls._has_loaded = True
