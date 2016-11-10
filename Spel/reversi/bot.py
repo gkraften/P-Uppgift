@@ -21,3 +21,19 @@ class Bot:
         if self.type != self.game.get_turn():
             raise WrongTurnException("It is not currently the bots turn")
 
+        board = self.game.get_board()
+
+        best = 0
+        best_pos = None
+        for row in range(board.size):
+            for col in range(board.size):
+                flips = board.nflips(self.type, row, col)
+                if flips > best:
+                    best = flips
+                    best_pos = (row, col)
+
+        if best_pos is None:
+            self.game.skip()
+            return None
+        else:
+            return self.game.place(*best_pos)
