@@ -81,7 +81,7 @@ class Board:
                 candidates.append(pos)
                 pos = (pos[0] + direction[0], pos[1] + direction[1])
 
-            if 0 <= pos[0] <= self.size-1 and 0 <= pos[1] <= self.size-1:
+            if 0 <= pos[0] <= self.size-1 and 0 <= pos[1] <= self.size-1 and self.board[pos[0]][pos[1]] == type:
                 flipped += candidates
 
         return flipped
