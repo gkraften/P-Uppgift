@@ -186,3 +186,8 @@ class Reversi:
                 return [winner, abs(n_black - n_white)]
         else:
             return None
+
+    def get_board(self):
+        '''Returns the board.'''
+
+        return self.board
