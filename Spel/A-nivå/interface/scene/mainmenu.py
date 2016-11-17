@@ -1,4 +1,4 @@
-from interface import Scene
+from interface.scene import Scene
 
 import sfml as sf
 

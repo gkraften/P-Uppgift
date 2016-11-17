@@ -12,7 +12,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)) + os.sep + "..")
 
 import sfml as sf
 
-from interface.scenes.mainmenu import MainMenu
+from interface.scene.mainmenu import MainMenu
 
 WIDTH = 640
 HEIGHT = 480
