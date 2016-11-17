@@ -17,7 +17,10 @@ from interface.scene.mainmenu import MainMenu
 WIDTH = 640
 HEIGHT = 480
 
-window = sf.graphics.RenderWindow(sf.window.VideoMode(WIDTH, HEIGHT), "Reversi")
+settings = sf.window.ContextSettings()
+settings.antialiasing_level = 8
+
+window = sf.graphics.RenderWindow(sf.window.VideoMode(WIDTH, HEIGHT), "Reversi", sf.window.Style.DEFAULT, settings)
 
 scene = MainMenu(window)
 
