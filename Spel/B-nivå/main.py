@@ -1,5 +1,5 @@
 # P-Uppgift - Oscar Gustavsson (ogust@kth.se)
-# E-nivå
+# B-nivå
 
 # Fult hack för att kunna importera reversi-modulerna
 # som ligger i en annan mapp
