@@ -17,13 +17,13 @@ class MainMenu(Scene):
         self.title = sf.graphics.Text()
         self.title.string = "Reversi"
         self.title.font = font
-        self.title.character_size = size.y * self.TITLE_SCALE
-        self.title.color = sf.graphics.Color.BLACK
+        self.title.character_size = int(size.y * self.TITLE_SCALE)
+        self.title.color = sf.graphics.Color.WHITE
         title_bounds = self.title.global_bounds
         self.title.position = (size.x/2 - title_bounds.width/2, 10)
 
     def draw(self):
-        self.target.clear(sf.graphics.Color.CYAN)
+        self.target.clear(sf.graphics.Color.BLACK)
 
         self.target.draw(self.title)
 
@@ -31,4 +31,13 @@ class MainMenu(Scene):
         return None
 
     def event(self, events):
-        pass
+        for e in events:
+            if type(e) == sf.window.ResizeEvent:
+                size = self.target.size
+
+                view = sf.graphics.View(sf.graphics.Rectangle((0, 0), (size.x, size.y)))
+                self.target.view = view
+
+                self.title.character_size = int(size.y * self.TITLE_SCALE)
+                title_bounds = self.title.global_bounds
+                self.title.position = (size.x / 2 - title_bounds.width / 2, 10)

@@ -14,8 +14,8 @@ import sfml as sf
 
 from interface.scene.mainmenu import MainMenu
 
-WIDTH = 640
-HEIGHT = 480
+WIDTH = 800
+HEIGHT = 600
 
 settings = sf.window.ContextSettings()
 settings.antialiasing_level = 8
