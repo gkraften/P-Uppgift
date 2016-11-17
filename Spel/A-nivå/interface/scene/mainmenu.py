@@ -10,3 +10,6 @@ class MainMenu(Scene):
 
     def update(self, t):
         return None
+
+    def event(self, events):
+        pass

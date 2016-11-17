@@ -22,3 +22,10 @@ class Scene(ABC):
         None if the scene should not change."""
 
         pass
+
+    @abstractmethod
+    def event(self, events):
+        """Called when SFML has caught an event. events is
+        a list containing all caught events."""
+
+        pass

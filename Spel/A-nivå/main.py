@@ -23,9 +23,15 @@ scene = MainMenu(window)
 
 clock = sf.system.Clock()
 while window.is_open:
+    events = []
+
     for event in window.events:
         if type(event) is sf.window.CloseEvent:
             window.close();
+        else:
+            events.append(event)
+
+    scene.event(events)
 
     next_scene = scene.update(clock.restart())
 
