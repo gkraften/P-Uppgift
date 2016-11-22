@@ -42,9 +42,15 @@ class MainMenu(Scene):
             item.draw(self.target)
 
     def update(self, t):
+        for button in self.menuitems:
+            button.update(t)
+
         return None
 
     def event(self, events):
+        for button in self.menuitems:
+            button.event(events)
+
         for e in events:
             if type(e) == sf.window.ResizeEvent:
                 # Window has been resized. Resize components.
