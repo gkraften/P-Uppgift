@@ -56,3 +56,6 @@ class Button(Component):
         """Set character size."""
 
         self.text.character_size = size
+
+    def update(self, t):
+        pass
