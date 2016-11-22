@@ -1,4 +1,5 @@
 from interface.scene import Scene
+import interface.assets as assets
 
 import sfml as sf
 
@@ -12,7 +13,7 @@ class MainMenu(Scene):
 
         size = self.target.size
 
-        font = sf.graphics.Font.from_file("/home/oscar/Skrivbord/P-Uppgift/Spel/A-nivå/assets/Amethyst.ttf")
+        font = sf.graphics.Font.from_file(assets.get_asset("/fonts/Amethyst.ttf"))
 
         # Title
         self.title = sf.graphics.Text()
