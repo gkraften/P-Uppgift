@@ -4,11 +4,13 @@ class Component(ABC):
     """Abstract base class that all components such as
     buttons should inherit from."""
 
+    def __init__(self, target):
+        self.target = target
+
     @abstractmethod
-    def draw(self, target):
+    def draw(self):
         """Method that is called when the component
-        should render itself. Target si what to render
-        to."""
+        should render itself."""
 
         pass
 
