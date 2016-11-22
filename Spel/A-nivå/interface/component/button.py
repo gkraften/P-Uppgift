@@ -59,5 +59,27 @@ class Button(Component):
 
         self.text.character_size = size
 
-    def update(self, t):
-        pass
+    def _hovering(self):
+        """Returns whether the mouse is above the button."""
+
+        mpos = sf.window.Mouse.get_position(self.target)
+
+        pos = self.get_position()
+        bounds = self.get_bounds()
+
+        rect = sf.graphics.Rectangle(pos, bounds)
+
+        return rect.contains(mpos)
+
+    def event(self, e):
+        for ev in e:
+            if type(ev) == sf.window.MouseButtonEvent:
+                if ev.pressed and self._hovering():
+                    self.text.color = sf.graphics.Color.YELLOW
+                if ev.released and self._hovering() and not self.listener is None:
+                    self.listener()
+            elif type(ev) == sf.window.MouseMoveEvent and not sf.window.Mouse.is_button_pressed(sf.window.Mouse.LEFT):
+                if self._hovering():
+                    self.text.color = sf.graphics.Color.RED
+                else:
+                    self.text.color = sf.graphics.Color.WHITE
