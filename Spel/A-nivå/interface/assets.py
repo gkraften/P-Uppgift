@@ -1,6 +1,6 @@
 import os
 
-assets_path = os.path.dirname(os.path.realpath(__file__))
+assets_path = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + ".."
 
 def get_asset(path):
     """Returns the path to an asset located in the assets
