@@ -39,7 +39,7 @@ class MainMenu(Scene):
         self.target.draw(self.title)
 
         for item in self.menuitems:
-            item.draw(self.target)
+            item.draw()
 
     def update(self, t):
         for button in self.menuitems:

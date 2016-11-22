@@ -6,9 +6,11 @@ import sfml as sf
 class Button(Component):
     """A button that can be rendered to the screen."""
 
-    def __init__(self, text, pos=(0, 0)):
+    def __init__(self, target, text, pos=(0, 0)):
         """Initialize new button with text text at
         position pos."""
+
+        super().__init__(target)
 
         font = sf.graphics.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
         self.text = sf.graphics.Text()
@@ -21,9 +23,9 @@ class Button(Component):
 
         self.listener = None
 
-    def draw(self, target):
+    def draw(self):
         #target.draw(self.rect)
-        target.draw(self.text)
+        self.target.draw(self.text)
 
     def set_text(self, text):
         """Set text displayed on the button."""
