@@ -15,12 +15,12 @@ class Button(Component):
         font = sf.graphics.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
         self.text = sf.graphics.Text()
         self.text.string = text
-        self.text.font = self.font
-        self.text.character_size = 12
+        self.text.font = font
+        self.text.character_size = 18
         self.text.color = sf.graphics.Color.WHITE
-        self.text.position = (pos[0] + self._MARGIN, pos[1] + self._MARGIN)
+        self.text.position = (pos[0], pos[1] + self._MARGIN)
 
-        text_bounds = self.text.global_bounds
+        text_bounds = self.text.local_bounds
         self.rect = sf.graphics.RectangleShape((text_bounds.width + 2*self._MARGIN, text_bounds.height + 2*self._MARGIN))
         self.rect.fill_color = sf.graphics.Color.RED
         self.rect.position = pos
