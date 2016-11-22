@@ -63,3 +63,7 @@ class Button(Component):
         """Set character size."""
 
         self.text.character_size = size
+
+        text_bounds = self.text.local_bounds
+
+        self.rect.size = (text_bounds.width + 2*self._MARGIN, text_bounds.height + 2*self._MARGIN)
