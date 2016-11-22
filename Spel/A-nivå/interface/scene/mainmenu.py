@@ -1,5 +1,6 @@
 from interface.scene import Scene
 import interface.assets as assets
+from interface.component.button import Button
 
 import sfml as sf
 
@@ -24,10 +25,15 @@ class MainMenu(Scene):
         title_bounds = self.title.global_bounds
         self.title.position = (size.x/2 - title_bounds.width/2, 10)
 
+        # Menu items
+        self.one_p = Button("Spela en spelare")
+
     def draw(self):
         self.target.clear(sf.graphics.Color.BLACK)
 
         self.target.draw(self.title)
+
+        self.one_p.draw(self.target)
 
     def update(self, t):
         return None
