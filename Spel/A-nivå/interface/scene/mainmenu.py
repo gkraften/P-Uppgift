@@ -14,6 +14,7 @@ class MainMenu(Scene):
 
         font = sf.graphics.Font.from_file("/home/oscar/Skrivbord/P-Uppgift/Spel/A-nivå/assets/Amethyst.ttf")
 
+        # Title
         self.title = sf.graphics.Text()
         self.title.string = "Reversi"
         self.title.font = font
@@ -33,6 +34,7 @@ class MainMenu(Scene):
     def event(self, events):
         for e in events:
             if type(e) == sf.window.ResizeEvent:
+                # Window has been resized. Resize components.
                 size = self.target.size
 
                 view = sf.graphics.View(sf.graphics.Rectangle((0, 0), (size.x, size.y)))
