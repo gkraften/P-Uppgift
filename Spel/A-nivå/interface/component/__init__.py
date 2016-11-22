@@ -12,7 +12,7 @@ class Component(ABC):
 
         pass
 
-    def update(self):
+    def update(self, t):
         """Method called when component is allowed
         to update itself."""
 
