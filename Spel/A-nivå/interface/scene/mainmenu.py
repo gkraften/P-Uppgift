@@ -8,6 +8,7 @@ class MainMenu(Scene):
     """Class representing the main menu."""
 
     TITLE_SCALE = 1/10
+    BUTTON_SCALE = 1/5
 
     def __init__(self, target):
         super().__init__(target)
@@ -26,14 +27,24 @@ class MainMenu(Scene):
         self.title.position = (size.x/2 - title_bounds.width/2, 10)
 
         # Menu items
-        self.one_p = Button("Spela en spelare")
+        self.menuitems = []
+        for item in enumerate(["Spela en spelare", "Spela två spelare", "Avsluta"]):
+            button = Button(item[1])
+            button.set_character_size(size.y * self.BUTTON_SCALE)
+
+            bounds = button.get_bounds()
+
+            button.set_position((size.x/2 - bounds[0]/2, size.y/5 + item[0]*size.y/5))
+
+            self.menuitems.append(button)
 
     def draw(self):
         self.target.clear(sf.graphics.Color.BLACK)
 
         self.target.draw(self.title)
 
-        self.one_p.draw(self.target)
+        for item in self.menuitems:
+            item.draw(self.target)
 
     def update(self, t):
         return None
