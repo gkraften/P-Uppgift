@@ -29,7 +29,7 @@ class MainMenu(Scene):
         # Menu items
         self.menuitems = []
         for item in ["Spela en spelare", "Spela två spelare", "Avsluta"]:
-            button = Button(item)
+            button = Button(target, item)
             self.menuitems.append(button)
         self._setup_buttons()
 
