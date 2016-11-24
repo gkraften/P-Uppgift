@@ -35,6 +35,7 @@ class MainMenu(Scene):
             button = Button(target, item[0])
             button.set_listener(item[1])
             self.menuitems.append(button)
+            self.add_component(button)
         self._setup_buttons()
 
     def draw(self):
@@ -46,14 +47,12 @@ class MainMenu(Scene):
             item.draw()
 
     def update(self, t):
-        for button in self.menuitems:
-            button.update(t)
+        super().update(t)
 
         return self.next_scene
 
     def event(self, events):
-        for button in self.menuitems:
-            button.event(events)
+        super().event(events)
 
         for e in events:
             if type(e) == sf.window.ResizeEvent:

@@ -22,20 +22,25 @@ class ColorMenu(Scene):
         self.button_white = Button(self.target, "Vit")
         self.button_black = Button(self.target, "Svart")
 
+        self.add_component(self.button_white)
+        self.add_component(self.button_black)
+
         self._setup_components()
 
     def draw(self):
         self.target.clear(sf.graphics.Color.BLACK)
 
         self.target.draw(self.title)
-        self.button_white.draw()
-        self.button_black.draw()
+
+        for c in self.components:
+            c.draw()
 
     def update(self, t):
-        self.button_white.update(t)
-        self.button_black.update(t)
+        super().update(t)
 
     def event(self, events):
+        super().event(events)
+
         for e in events:
             if type(e) == sf.window.ResizeEvent:
                 size = self.target.size
@@ -44,9 +49,6 @@ class ColorMenu(Scene):
                 self.target.view = view
 
                 self._setup_components()
-
-        self.button_white.event(events)
-        self.button_black.event(events)
 
     def _setup_components(self):
         size = self.target.size
