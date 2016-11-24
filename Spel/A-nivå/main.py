@@ -10,26 +10,26 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)) + os.sep + "..")
 
 # Här börjar själva programmet
 
-import sfml as sf
+from sfml import sf
 
 from interface.scene.mainmenu import MainMenu
 
 WIDTH = 800
 HEIGHT = 600
 
-settings = sf.window.ContextSettings()
+settings = sf.ContextSettings()
 settings.antialiasing_level = 8
 
-window = sf.graphics.RenderWindow(sf.window.VideoMode(WIDTH, HEIGHT), "Reversi", sf.window.Style.DEFAULT, settings)
+window = sf.RenderWindow(sf.VideoMode(WIDTH, HEIGHT), "Reversi", sf.Style.DEFAULT, settings)
 
 scene = MainMenu(window)
 
-clock = sf.system.Clock()
+clock = sf.Clock()
 while window.is_open:
     events = []
 
     for event in window.events:
-        if type(event) is sf.window.CloseEvent:
+        if type(event) is sf.CloseEvent:
             window.close();
         else:
             events.append(event)

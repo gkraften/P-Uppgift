@@ -2,7 +2,7 @@ from interface.scene import Scene
 import interface.assets as assets
 from interface.component.button import Button
 
-import sfml as sf
+from sfml import sf
 
 class SizeMenu(Scene):
     """Class representing a menu that lets player
@@ -24,15 +24,15 @@ class SizeMenu(Scene):
         self.single_player = single_player
         self.color = color
 
-        font = sf.graphics.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
-        self.title = sf.graphics.Text()
+        font = sf.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
+        self.title = sf.Text()
         self.title.string = "Välj storlek på brädet"
         self.title.font = font
 
         self._setup_components()
 
     def draw(self):
-        self.target.clear(sf.graphics.Color.BLACK)
+        self.target.clear(sf.Color.BLACK)
 
         self.target.draw(self.title)
 
@@ -43,10 +43,10 @@ class SizeMenu(Scene):
         super().event(events)
 
         for e in events:
-            if type(e) == sf.window.ResizeEvent:
+            if type(e) == sf.ResizeEvent:
                 size = self.target.size
 
-                view = sf.graphics.View(sf.graphics.Rectangle((0, 0), (size.x, size.y)))
+                view = sf.View(sf.Rectangle((0, 0), (size.x, size.y)))
                 self.target.view = view
 
                 self._setup_components()

@@ -1,7 +1,7 @@
 from interface.component import Component
 import interface.assets as assets
 
-import sfml as sf
+from sfml import sf
 
 class Button(Component):
     """A button that can be rendered to the screen."""
@@ -12,11 +12,11 @@ class Button(Component):
 
         super().__init__(target)
 
-        font = sf.graphics.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
-        self.text = sf.graphics.Text()
+        font = sf.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
+        self.text = sf.Text()
         self.text.string = text
         self.text.font = font
-        self.text.color = sf.graphics.Color.WHITE
+        self.text.color = sf.Color.WHITE
 
         self.set_character_size(18)
         self.set_position(pos)
@@ -62,24 +62,24 @@ class Button(Component):
     def _hovering(self):
         """Returns whether the mouse is above the button."""
 
-        mpos = sf.window.Mouse.get_position(self.target)
+        mpos = sf.Mouse.get_position(self.target)
 
         pos = self.get_position()
         bounds = self.get_bounds()
 
-        rect = sf.graphics.Rectangle(pos, bounds)
+        rect = sf.Rectangle(pos, bounds)
 
         return rect.contains(mpos)
 
     def event(self, e):
         for ev in e:
-            if type(ev) == sf.window.MouseButtonEvent:
+            if type(ev) == sf.MouseButtonEvent:
                 if ev.pressed and self._hovering():
-                    self.text.color = sf.graphics.Color(127, 0, 0)
+                    self.text.color = sf.Color(127, 0, 0)
                 if ev.released and self._hovering() and not self.listener is None:
                     self.listener()
-            elif type(ev) == sf.window.MouseMoveEvent and not sf.window.Mouse.is_button_pressed(sf.window.Mouse.LEFT):
+            elif type(ev) == sf.MouseMoveEvent and not sf.Mouse.is_button_pressed(sf.Mouse.LEFT):
                 if self._hovering():
-                    self.text.color = sf.graphics.Color.RED
+                    self.text.color = sf.Color.RED
                 else:
-                    self.text.color = sf.graphics.Color.WHITE
+                    self.text.color = sf.Color.WHITE

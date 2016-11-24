@@ -3,7 +3,7 @@ from interface.scene.sizemenu import SizeMenu
 import interface.assets as assets
 from interface.component.button import Button
 
-import sfml as sf
+from sfml import sf
 
 import reversi
 
@@ -19,8 +19,8 @@ class ColorMenu(Scene):
 
         self.next_scene = None
 
-        font = sf.graphics.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
-        self.title = sf.graphics.Text()
+        font = sf.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
+        self.title = sf.Text()
         self.title.string = "Vilken färg vill du spela som?"
         self.title.font = font
 
@@ -35,7 +35,7 @@ class ColorMenu(Scene):
         self._setup_components()
 
     def draw(self):
-        self.target.clear(sf.graphics.Color.BLACK)
+        self.target.clear(sf.Color.BLACK)
 
         self.target.draw(self.title)
 
@@ -46,10 +46,10 @@ class ColorMenu(Scene):
         super().event(events)
 
         for e in events:
-            if type(e) == sf.window.ResizeEvent:
+            if type(e) == sf.ResizeEvent:
                 size = self.target.size
 
-                view = sf.graphics.View(sf.graphics.Rectangle((0, 0), (size.x, size.y)))
+                view = sf.View(sf.Rectangle((0, 0), (size.x, size.y)))
                 self.target.view = view
 
                 self._setup_components()

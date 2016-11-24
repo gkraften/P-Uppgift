@@ -3,7 +3,7 @@ from interface.scene.colormenu import ColorMenu
 import interface.assets as assets
 from interface.component.button import Button
 
-import sfml as sf
+from sfml import sf
 
 class MainMenu(Scene):
     """Class representing the main menu."""
@@ -18,14 +18,14 @@ class MainMenu(Scene):
 
         size = self.target.size
 
-        font = sf.graphics.Font.from_file(assets.get_asset("/fonts/Amethyst.ttf"))
+        font = sf.Font.from_file(assets.get_asset("/fonts/Amethyst.ttf"))
 
         # Title
-        self.title = sf.graphics.Text()
+        self.title = sf.Text()
         self.title.string = "Reversi"
         self.title.font = font
         self.title.character_size = int(size.y * self.TITLE_SCALE)
-        self.title.color = sf.graphics.Color.WHITE
+        self.title.color = sf.Color.WHITE
         title_bounds = self.title.global_bounds
         self.title.position = (size.x/2 - title_bounds.width/2, 10)
 
@@ -39,7 +39,7 @@ class MainMenu(Scene):
         self._setup_buttons()
 
     def draw(self):
-        self.target.clear(sf.graphics.Color.BLACK)
+        self.target.clear(sf.Color.BLACK)
 
         self.target.draw(self.title)
 
@@ -55,11 +55,11 @@ class MainMenu(Scene):
         super().event(events)
 
         for e in events:
-            if type(e) == sf.window.ResizeEvent:
+            if type(e) == sf.ResizeEvent:
                 # Window has been resized. Resize components.
                 size = self.target.size
 
-                view = sf.graphics.View(sf.graphics.Rectangle((0, 0), (size.x, size.y)))
+                view = sf.View(sf.Rectangle((0, 0), (size.x, size.y)))
                 self.target.view = view
 
                 self.title.character_size = int(size.y * self.TITLE_SCALE)
