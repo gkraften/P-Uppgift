@@ -35,9 +35,6 @@ class ColorMenu(Scene):
         for c in self.components:
             c.draw()
 
-    def update(self, t):
-        super().update(t)
-
     def event(self, events):
         super().event(events)
 
