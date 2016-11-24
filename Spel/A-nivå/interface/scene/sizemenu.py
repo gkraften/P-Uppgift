@@ -1,6 +1,7 @@
 from interface.scene import Scene
 import interface.assets as assets
 from interface.component.spinner import Spinner
+from interface.component.button import Button
 
 from sfml import sf
 
@@ -8,7 +9,8 @@ class SizeMenu(Scene):
     """Class representing a menu that lets player
     choose size of board."""
 
-    TITLE_SCALE = 1 / 10
+    TITLE_SCALE = 1/10
+    SCALE = 1/15
 
     def __init__(self, target, single_player, color=None):
         """Instantiate SizeMenu. target is window to draw to,
@@ -31,7 +33,10 @@ class SizeMenu(Scene):
 
         self.size = Spinner(target, 4, 20, 2)
 
+        self.next = Button(target, "Fortsätt")
+
         self.add_component(self.size)
+        self.add_component(self.next)
 
         self._setup_components()
 
@@ -62,5 +67,10 @@ class SizeMenu(Scene):
         title_bounds = self.title.local_bounds
         self.title.position = (size.x / 2 - title_bounds.width / 2, 10)
 
-        self.size.set_position((100, 100))
-        self.size.set_character_size(40)
+        self.size.set_character_size(size.y * self.SCALE)
+        bounds = self.size.get_bounds()
+        self.size.set_position((size.x/2 - bounds[0]/2, size.y/2 - bounds[1]/2))
+
+        self.next.set_character_size(size.y * self.SCALE)
+        next_bounds = self.next.get_bounds()
+        self.next.set_position((size.x/2 - next_bounds[0]/2, 3*size.y/4 - next_bounds[1]/2))

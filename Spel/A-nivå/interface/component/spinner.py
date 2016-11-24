@@ -7,6 +7,8 @@ from sfml import sf
 class Spinner(Component):
     """Spinner allowing you to choose a number."""
 
+    MARGIN = 5
+
     def __init__(self, target, low, high, step, init=None):
         """Initialize a new Spinner. target is window to
         draw to, low is lower boundary, high is higher
@@ -24,7 +26,9 @@ class Spinner(Component):
             self.value = init
 
         self.more = Button(target, "Större")
+        self.more.set_listener(self.increment)
         self.less = Button(target, "Mindre")
+        self.less.set_listener(self.decrement)
 
         font = sf.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
         self.display = sf.Text()
@@ -32,13 +36,20 @@ class Spinner(Component):
         self.display.string = str(self.value)
 
         self.set_character_size(14)
+        self.set_position((0, 0))
 
     def draw(self):
-        self.target.clear(sf.Color.BLACK)
-
         self.target.draw(self.display)
         self.less.draw()
         self.more.draw()
+
+    def update(self, t):
+        self.more.update(t)
+        self.less.update(t)
+
+    def event(self, events):
+        self.more.event(events)
+        self.less.event(events)
 
     def set_character_size(self, size):
         self.display.character_size = size
@@ -50,5 +61,34 @@ class Spinner(Component):
         less_bounds = self.less.get_bounds()
 
         self.display.position = pos
-        self.less.set_position((pos[0], pos[1] + disp_bounds.height + 5))
-        self.more.set_position((pos[0] + less_bounds[0] + 5, pos[1] + disp_bounds.height + 5))
+        self.less.set_position((pos[0], pos[1] + disp_bounds.height + self.MARGIN))
+        self.more.set_position((pos[0] + less_bounds[0] + self.MARGIN, pos[1] + disp_bounds.height + self.MARGIN))
+
+    def get_bounds(self):
+        disp_bounds = self.display.local_bounds
+        less_bounds = self.less.get_bounds()
+        more_bounds = self.more.get_bounds()
+
+        return (less_bounds[0] + self.MARGIN + more_bounds[0], disp_bounds.height + self.MARGIN + less_bounds[1])
+
+    def get_value(self):
+        return self.value
+
+    def set_value(self, val):
+        self.value = val
+
+        self.display.string = str(val)
+
+    def increment(self):
+        self.value += self.step
+        if self.value > self.high:
+            self.value = self.high
+
+        self.display.string = str(self.value)
+
+    def decrement(self):
+        self.value -= self.step
+        if self.value < self.low:
+            self.value = self.low
+
+        self.display.string = str(self.value)
