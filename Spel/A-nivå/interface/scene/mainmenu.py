@@ -86,4 +86,4 @@ class MainMenu(Scene):
     def _switch_colormenu(self):
         """Set scene to swtich to to ColorMenu."""
 
-        self.next_scene = ColorMenu()
+        self.next_scene = ColorMenu(self.target)
