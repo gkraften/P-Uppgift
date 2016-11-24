@@ -16,7 +16,7 @@ class SizeMenu(Scene):
         be played and color is the color the player wants to
         play as in case of single player."""
 
-        super().__inti__(target)
+        super().__init__(target)
 
         if single_player and color is None:
             raise ValueError("Color must not be None if single_player is True.")

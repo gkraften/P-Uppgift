@@ -25,7 +25,9 @@ class ColorMenu(Scene):
         self.title.font = font
 
         self.button_white = Button(self.target, "Vit")
+        self.button_white.set_listener(self._switch_size_white)
         self.button_black = Button(self.target, "Svart")
+        self.button_black.set_listener(self._switch_size_black)
 
         self.add_component(self.button_white)
         self.add_component(self.button_black)
@@ -75,5 +77,5 @@ class ColorMenu(Scene):
     def _switch_size_white(self):
         self.next_scene = SizeMenu(self.target, True, reversi.WHITE)
 
-    def _switch_size_white(self):
+    def _switch_size_black(self):
         self.next_scene = SizeMenu(self.target, True, reversi.BLACK)
