@@ -1,5 +1,5 @@
 from interface.component import Component
-from interface.component import Button
+from interface.component.button import Button
 import interface.assets as assets
 
 from sfml import sf

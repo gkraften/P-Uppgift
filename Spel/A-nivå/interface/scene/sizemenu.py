@@ -1,6 +1,6 @@
 from interface.scene import Scene
 import interface.assets as assets
-from interface.component.button import Button
+from interface.component.spinner import Spinner
 
 from sfml import sf
 
@@ -28,6 +28,10 @@ class SizeMenu(Scene):
         self.title = sf.Text()
         self.title.string = "Välj storlek på brädet"
         self.title.font = font
+
+        self.size = Spinner(target, 4, 20, 2)
+
+        self.add_component(self.size)
 
         self._setup_components()
 
@@ -57,3 +61,6 @@ class SizeMenu(Scene):
         self.title.character_size = size.y * self.TITLE_SCALE
         title_bounds = self.title.local_bounds
         self.title.position = (size.x / 2 - title_bounds.width / 2, 10)
+
+        self.size.set_position((100, 100))
+        self.size.set_character_size(40)
