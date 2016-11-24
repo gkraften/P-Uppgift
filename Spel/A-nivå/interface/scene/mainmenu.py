@@ -28,8 +28,9 @@ class MainMenu(Scene):
 
         # Menu items
         self.menuitems = []
-        for item in ["Spela en spelare", "Spela två spelare", "Avsluta"]:
-            button = Button(target, item)
+        for item in [["Spela en spelare", None], ["Spela två spelare", None], ["Avsluta", target.close]]:
+            button = Button(target, item[0])
+            button.set_listener(item[1])
             self.menuitems.append(button)
         self._setup_buttons()
 
