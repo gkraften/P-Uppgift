@@ -1,4 +1,5 @@
 from interface.scene import Scene
+from interface.scene.colormenu import ColorMenu
 import interface.assets as assets
 from interface.component.button import Button
 
@@ -12,6 +13,8 @@ class MainMenu(Scene):
 
     def __init__(self, target):
         super().__init__(target)
+
+        self.next_scene = None
 
         size = self.target.size
 
@@ -28,7 +31,7 @@ class MainMenu(Scene):
 
         # Menu items
         self.menuitems = []
-        for item in [["Spela en spelare", None], ["Spela två spelare", None], ["Avsluta", target.close]]:
+        for item in [["Spela en spelare", self._switch_colormenu], ["Spela två spelare", None], ["Avsluta", target.close]]:
             button = Button(target, item[0])
             button.set_listener(item[1])
             self.menuitems.append(button)
@@ -46,7 +49,7 @@ class MainMenu(Scene):
         for button in self.menuitems:
             button.update(t)
 
-        return None
+        return self.next_scene
 
     def event(self, events):
         for button in self.menuitems:
@@ -79,3 +82,8 @@ class MainMenu(Scene):
             bounds = button.get_bounds()
 
             button.set_position((size.x / 2 - bounds[0] / 2, 2 * size.y / 6 + b[0] * size.y / 5))
+
+    def _switch_colormenu(self):
+        """Set scene to swtich to to ColorMenu."""
+
+        self.next_scene = ColorMenu()
