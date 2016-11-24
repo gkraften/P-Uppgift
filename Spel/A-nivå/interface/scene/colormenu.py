@@ -1,8 +1,11 @@
 from interface.scene import Scene
+from interface.scene.sizemenu import SizeMenu
 import interface.assets as assets
 from interface.component.button import Button
 
 import sfml as sf
+
+import reversi
 
 class ColorMenu(Scene):
     """Class representing menu that lets the player
@@ -13,6 +16,8 @@ class ColorMenu(Scene):
 
     def __init__(self, target):
         super().__init__(target)
+
+        self.next_scene = None
 
         font = sf.graphics.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
         self.title = sf.graphics.Text()
@@ -47,6 +52,11 @@ class ColorMenu(Scene):
 
                 self._setup_components()
 
+    def update(self, t):
+        super().update(t)
+
+        return self.next_scene
+
     def _setup_components(self):
         size = self.target.size
 
@@ -61,3 +71,9 @@ class ColorMenu(Scene):
         self.button_white.set_character_size(size.y * self.BUTTON_SCALE)
         white_bounds = self.button_white.get_bounds()
         self.button_white.set_position((3*size.x / 4 - white_bounds[0] / 2, size.y / 2 - white_bounds[1] / 2))
+
+    def _switch_size_white(self):
+        self.next_scene = SizeMenu(self.target, True, reversi.WHITE)
+
+    def _switch_size_white(self):
+        self.next_scene = SizeMenu(self.target, True, reversi.BLACK)
