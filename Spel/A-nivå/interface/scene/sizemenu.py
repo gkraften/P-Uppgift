@@ -27,11 +27,17 @@ class SizeMenu(Scene):
         font = sf.graphics.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
         self.title = sf.graphics.Text()
         self.title.string = "Välj storlek på brädet"
+        self.title.font = font
+
+        self._setup_components()
 
     def draw(self):
         self.target.clear(sf.graphics.Color.BLACK)
 
         self.target.draw(self.title)
+
+        for c in self.components:
+            c.draw()
 
     def event(self, events):
         super().event(events)
