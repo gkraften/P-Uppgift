@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class Scene(ABC):
+class Scene():
     """Abstract class responsible of drawing to window."""
 
     def __init__(self, target):
@@ -8,24 +8,29 @@ class Scene(ABC):
 
         self.target = target
 
+        self.components = []
+
     @abstractmethod
     def draw(self):
         """Called when the instance should render its content."""
 
         pass
 
-    @abstractmethod
     def update(self, t):
         """Called when the instance should run update code.
         t is the duration of the main loop. An instance
         of the scene to switch to should be returned or
         None if the scene should not change."""
 
-        pass
+        for component in self.components:
+            component.update(t)
 
-    @abstractmethod
     def event(self, events):
         """Called when SFML has caught an event. events is
         a list containing all caught events."""
 
-        pass
+        for component in self.components:
+            component.event(events)
+
+    def add_component(self, c):
+        self.components.append(c)
