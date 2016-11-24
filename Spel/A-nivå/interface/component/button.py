@@ -75,7 +75,7 @@ class Button(Component):
         for ev in e:
             if type(ev) == sf.window.MouseButtonEvent:
                 if ev.pressed and self._hovering():
-                    self.text.color = sf.graphics.Color.YELLOW
+                    self.text.color = sf.graphics.Color(127, 0, 0)
                 if ev.released and self._hovering() and not self.listener is None:
                     self.listener()
             elif type(ev) == sf.window.MouseMoveEvent and not sf.window.Mouse.is_button_pressed(sf.window.Mouse.LEFT):
