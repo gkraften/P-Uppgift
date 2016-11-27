@@ -1,4 +1,5 @@
 from interface.scene import Scene
+from interface.scene.GameScene import GameScene
 import interface.assets as assets
 from interface.component.spinner import Spinner
 from interface.component.button import Button
@@ -23,6 +24,8 @@ class SizeMenu(Scene):
         if single_player and color is None:
             raise ValueError("Color must not be None if single_player is True.")
 
+        self.next_scene = None
+
         self.single_player = single_player
         self.color = color
 
@@ -34,6 +37,7 @@ class SizeMenu(Scene):
         self.size = Spinner(target, 4, 20, 2, 10)
 
         self.next = Button(target, "Fortsätt")
+        self.next.set_listener(self._switch_to_game)
 
         self.add_component(self.size)
         self.add_component(self.next)
@@ -60,6 +64,11 @@ class SizeMenu(Scene):
 
                 self._setup_components()
 
+    def update(self, t):
+        super().update(t)
+
+        return self.next_scene
+
     def _setup_components(self):
         size = self.target.size
 
@@ -74,3 +83,6 @@ class SizeMenu(Scene):
         self.next.set_character_size(size.y * self.SCALE)
         next_bounds = self.next.get_bounds()
         self.next.set_position((size.x/2 - next_bounds[0]/2, 3*size.y/4 - next_bounds[1]/2))
+
+    def _switch_to_game(self):
+        self.next_scene = GameScene(self.target, self.size.get_value(), self.single_player, self.color)
