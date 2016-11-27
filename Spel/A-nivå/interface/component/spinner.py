@@ -56,11 +56,17 @@ class Spinner(Component):
         self.more.set_character_size(size)
         self.less.set_character_size(size)
 
+    def get_position(self):
+        return self.pos
+
     def set_position(self, pos):
+        self.pos = pos
+
         disp_bounds = self.display.local_bounds
         less_bounds = self.less.get_bounds()
+        more_bounds = self.more.get_bounds()
 
-        self.display.position = pos
+        self.display.position = (pos[0] + (less_bounds[0] + self.MARGIN + more_bounds[0])/2 - disp_bounds.width/2, pos[1])
         self.less.set_position((pos[0], pos[1] + disp_bounds.height + self.MARGIN))
         self.more.set_position((pos[0] + less_bounds[0] + self.MARGIN, pos[1] + disp_bounds.height + self.MARGIN))
 
@@ -78,17 +84,18 @@ class Spinner(Component):
         self.value = val
 
         self.display.string = str(val)
+        self.set_position(self.pos)
 
     def increment(self):
-        self.value += self.step
-        if self.value > self.high:
-            self.value = self.high
+        val = self.value + self.step
+        if val > self.high:
+            val = self.high
 
-        self.display.string = str(self.value)
+        self.set_value(val)
 
     def decrement(self):
-        self.value -= self.step
-        if self.value < self.low:
-            self.value = self.low
+        val = self.value - self.step
+        if val < self.low:
+            val = self.low
 
-        self.display.string = str(self.value)
+        self.set_value(val)
