@@ -1,5 +1,5 @@
 from interface.scene import Scene
-from interface.scene.GameScene import GameScene
+from interface.scene.gamescene import GameScene
 import interface.assets as assets
 from interface.component.spinner import Spinner
 from interface.component.button import Button
