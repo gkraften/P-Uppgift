@@ -31,7 +31,7 @@ class SizeMenu(Scene):
         self.title.string = "Välj storlek på brädet"
         self.title.font = font
 
-        self.size = Spinner(target, 4, 20, 2)
+        self.size = Spinner(target, 4, 20, 2, 10)
 
         self.next = Button(target, "Fortsätt")
 
