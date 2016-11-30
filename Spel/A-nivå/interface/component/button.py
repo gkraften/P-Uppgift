@@ -62,7 +62,7 @@ class Button(Component):
     def _hovering(self):
         """Returns whether the mouse is above the button."""
 
-        mpos = sf.Mouse.get_position(self.target)
+        mpos = self.target.map_pixel_to_coords(sf.Mouse.get_position(self.target))
 
         pos = self.get_position()
         bounds = self.get_bounds()
