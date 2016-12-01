@@ -70,7 +70,7 @@ class GameScene(Scene):
                     self.add_component(piece)
                 else:
                     r.append(None)
-                self.pieces.append(r)
+            self.pieces.append(r)
 
         self.board_tiles = []
         for row in range(size):
@@ -115,12 +115,12 @@ class GameScene(Scene):
 
         self.target.draw(self.msg)
 
-        for c in self.components:
-            c.draw()
-
         for row in self.board_tiles:
             for tile in row:
                 self.target.draw(tile)
+
+        for c in self.components:
+            c.draw()
 
     def event(self, e):
         super().event(e)
