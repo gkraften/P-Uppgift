@@ -103,7 +103,8 @@ class GameScene(Scene):
 
         self.target.draw(self.msg)
 
-        self.skip.draw()
+        for c in self.components:
+            c.draw()
 
         for row in self.board_tiles:
             for tile in row:
