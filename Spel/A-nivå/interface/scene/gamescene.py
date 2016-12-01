@@ -24,6 +24,11 @@ class GameScene(Scene):
         if single_player and color is None:
             raise ValueError("Color must not be None if single_player is True.")
 
+        if single_player:
+            self.translation = {color: "Du", -color: "Datorn"}
+        else:
+            self.translation = {reversi.WHITE: "Vit", reversi.BLACK: "Svart"}
+
         self.board_size = size
 
         self.single_player = single_player
@@ -48,7 +53,7 @@ class GameScene(Scene):
 
         font = sf.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
         self.msg = sf.Text()
-        self.msg.string = "BLALBA ska spela"
+        self.msg.string = self.translation[self.game.get_turn()] + " ska spela"
         self.msg.font = font
 
         self.skip = Button(self.target, "Skippa tur")
