@@ -41,10 +41,6 @@ class Piece(Component):
         self.black.position = pos
         self.white.position = pos
 
-    def set_size(self, size):
-        self.size = size
-
-        scale = size/self.texture_size.x
-
+    def set_scale(self, scale):
         self.black.ratio = (scale, scale)
         self.white.ratio = (scale, scale)
