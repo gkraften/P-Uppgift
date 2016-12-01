@@ -1,6 +1,7 @@
 from interface.scene import Scene
 import interface.assets as assets
 from interface.component.button import Button
+from interface.component.piece import Piece
 
 from sfml import sf
 
@@ -59,6 +60,18 @@ class GameScene(Scene):
         self.skip = Button(self.target, "Skippa tur")
         self.add_component(self.skip)
 
+        self.pieces = []
+        for row in range(size):
+            r = []
+            for col in range(size):
+                if not board.is_empty(row, col):
+                    piece = Piece(target, board.get_board_list()[row][col])
+                    r.append(piece)
+                    self.add_component(piece)
+                else:
+                    r.append(None)
+                self.pieces.append(r)
+
         self.board_tiles = []
         for row in range(size):
             r = []
@@ -92,7 +105,6 @@ class GameScene(Scene):
                 r.append(sprite)
 
             self.board_tiles.append(r)
-        print(len(self.board_tiles))
 
         self._setup_components()
 
@@ -145,14 +157,29 @@ class GameScene(Scene):
             self.table.ratio = (r, r)
 
         ratio = size.y/(1.375*tile_size.y*self.board_size)
-        scaled_tile_size = tile_size.x * ratio
-        l_edge = (-self.board_size * scaled_tile_size + scaled_tile_size) / 2
-        t_edge = (-self.board_size * scaled_tile_size + scaled_tile_size) / 2
 
         for row in range(self.board_size):
             for col in range(self.board_size):
                 self.board_tiles[row][col].ratio = (ratio, ratio)
-                self.board_tiles[row][col].position = (l_edge + col*scaled_tile_size, t_edge + row*scaled_tile_size)
+                self.board_tiles[row][col].position = self._grid_position(row, col)
+
+                if not self.pieces[row][col] is None:
+                    self.pieces[row][col].set_position(self._grid_position(row, col))
+                    self.pieces[row][col].set_scale(ratio)
+
+    def _grid_position(self, row, col):
+        """Row and col are positions in game grid. Returns
+        position in world coordinates."""
+
+        size = self.target.size
+        tile_size = self.board_centre.size
+
+        ratio = size.y / (1.375 * tile_size.y * self.board_size)
+        scaled_tile_size = tile_size.x * ratio
+        l_edge = (-self.board_size * scaled_tile_size + scaled_tile_size) / 2
+        t_edge = (-self.board_size * scaled_tile_size + scaled_tile_size) / 2
+
+        return (l_edge + col*scaled_tile_size, t_edge + row*scaled_tile_size)
 
     def _get_sprite(self, texture):
         """Initializes a sprite with texture texture
