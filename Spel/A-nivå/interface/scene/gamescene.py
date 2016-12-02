@@ -188,8 +188,14 @@ class GameScene(Scene):
                     self.msg.string = "Datorn skippade sin runda"
                 else:
                     self.msg.string = self.translation[self.game.get_turn()] + " ska spela"
-                    for pos in flipped:
+                    for pos in flipped[:-1]:
                         self.pieces[pos[0]][pos[1]].flip()
+
+                    new = flipped[-1]
+                    piece = Piece(self.target, -self.color)
+                    piece.set_position(self._grid_position(*new))
+                    self.pieces[new[0]][new[1]] = piece
+                    self.add_component(piece)
                 self._setup_components()
 
     def _setup_components(self):
