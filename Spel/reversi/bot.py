@@ -15,8 +15,8 @@ class Bot:
 
     def play(self):
         '''Makes a move. Raises an exception if it is not the bot's turn.
-        Returns a list of all pieces that were flipped and None if it skipped its
-        turn.'''
+        Returns a list of all pieces that were flipped including the one
+        that was placed as final element and None if it skipped its turn.'''
 
         if self.type != self.game.get_turn():
             raise WrongTurnException("It is not currently the bots turn")
@@ -36,4 +36,6 @@ class Bot:
             self.game.skip()
             return None
         else:
-            return self.game.place(*best_pos)
+            flipped =  self.game.place(*best_pos)
+            flipped.append(best_pos)
+            return flipped
