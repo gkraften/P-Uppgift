@@ -178,6 +178,19 @@ class GameScene(Scene):
             if self.time.seconds >= 3:
                 from interface.scene.mainmenu import MainMenu
                 return MainMenu(self.target)
+        elif self.single_player and self.game.get_turn() == -self.color:
+            self.time += t
+            if self.time.seconds >= 1:
+                self.time = sf.seconds(0)
+
+                flipped = self.bot.play()
+                if flipped is None:
+                    self.msg.string = "Datorn skippade sin runda"
+                else:
+                    self.msg.string = self.translation[self.game.get_turn()] + " ska spela"
+                    for pos in flipped:
+                        self.pieces[pos[0]][pos[1]].flip()
+                self._setup_components()
 
     def _setup_components(self):
         size = self.target.size
