@@ -10,16 +10,14 @@ class Piece(Component):
 
     FLIP_TIME = 0.5
 
-    def __init__(self, target, color, scale):
+    def __init__(self, target, color):
         super().__init__(target)
 
         self.color = color
-        self.max_scale = scale
 
         self.time = sf.seconds(0)
 
         self.flipping = False
-        self.placing = True
 
         self.black_tex = sf.Texture.from_file(assets.get_asset("/images/black.png"))
         self.black_tex.smooth = True
@@ -54,16 +52,6 @@ class Piece(Component):
                 self.set_scale(ratio)
             else:
                 self.flipping = False
-                self.set_scale(self.max_scale)
-
-        if self.placing:
-            self.time += t
-
-            if self.time.seconds < self.FLIP_TIME:
-                ratio = self.max_scale / 2 * math.sin(math.pi/self.FLIP_TIME * self.time.seconds - math.pi/2) + self.max_scale / 2  # Apply a "smooth" animation
-                self.set_scale(ratio)
-            else:
-                self.placing = False
                 self.set_scale(self.max_scale)
 
     def flip(self):
