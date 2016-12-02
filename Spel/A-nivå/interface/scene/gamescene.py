@@ -52,6 +52,10 @@ class GameScene(Scene):
         self.board_corner.smooth = True
         self.board_edge = sf.Texture.from_file(assets.get_asset("/images/board_edge.png")) # Top edge
 
+        self.shadow_texture = sf.Texture.from_file(assets.get_asset("/images/shadow.png"))
+        self.shadow_texture.smooth = True
+        self.shadow = self._get_sprite(self.shadow_texture)
+
         font = sf.Font.from_file(assets.get_asset("/fonts/GeosansLight.ttf"))
         self.msg = sf.Text()
         self.msg.string = self.translation[self.game.get_turn()] + " ska spela"
@@ -115,6 +119,8 @@ class GameScene(Scene):
 
         self.target.draw(self.msg)
 
+        self.target.draw(self.shadow)
+
         for row in self.board_tiles:
             for tile in row:
                 self.target.draw(tile)
@@ -148,6 +154,9 @@ class GameScene(Scene):
         self.skip.set_character_size(size.y * self.SKIP_SCALE)
         skip_size = self.skip.get_bounds()
         self.skip.set_position((3*size.x/8 - skip_size[0]/2, skip_size[1]/2))
+
+        ratio = 8*size.y/(9*self.shadow_texture.size.y)
+        self.shadow.ratio = (ratio, ratio)
 
         if window_ratio >= table_ratio:
             r = size.x/table_size.x
