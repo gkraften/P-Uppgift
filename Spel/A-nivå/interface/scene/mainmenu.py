@@ -19,16 +19,17 @@ class MainMenu(Scene):
 
         size = self.target.size
 
+        view = sf.View(sf.Rectangle((0, 0), (size.x, size.y)))
+        self.target.view = view
+
         font = sf.Font.from_file(assets.get_asset("/fonts/Amethyst.ttf"))
 
         # Title
         self.title = sf.Text()
         self.title.string = "Reversi"
         self.title.font = font
-        self.title.character_size = int(size.y * self.TITLE_SCALE)
         self.title.color = sf.Color.WHITE
         title_bounds = self.title.global_bounds
-        self.title.position = (size.x/2 - title_bounds.width/2, 10)
 
         # Menu items
         self.menuitems = []
@@ -63,18 +64,18 @@ class MainMenu(Scene):
                 view = sf.View(sf.Rectangle((0, 0), (size.x, size.y)))
                 self.target.view = view
 
-                self.title.character_size = int(size.y * self.TITLE_SCALE)
-                title_bounds = self.title.global_bounds
-                self.title.position = (size.x / 2 - title_bounds.width / 2, 10)
-
                 self._setup_buttons()
 
     def _setup_buttons(self):
         """Set the buttons positions and sizes."""
 
-        for b in enumerate(self.menuitems):
-            size = self.target.size
+        size = self.target.size
 
+        self.title.character_size = int(size.y * self.TITLE_SCALE)
+        title_bounds = self.title.global_bounds
+        self.title.position = (size.x / 2 - title_bounds.width / 2, 10)
+
+        for b in enumerate(self.menuitems):
             button = b[1]
 
             button.set_character_size(size.y * self.BUTTON_SCALE)
