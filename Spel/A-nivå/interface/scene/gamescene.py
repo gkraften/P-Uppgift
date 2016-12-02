@@ -36,6 +36,8 @@ class GameScene(Scene):
         if single_player:
             self.color = color
 
+        self.time = sf.seconds(0)
+
         board = reversi.Board(size)
         self.game = reversi.Reversi(board)
 
@@ -62,6 +64,7 @@ class GameScene(Scene):
         self.msg.font = font
 
         self.skip = Button(self.target, "Skippa tur")
+        self.skip.set_listener(self._skip_pressed)
         self.add_component(self.skip)
 
         self.pieces = []
@@ -134,6 +137,47 @@ class GameScene(Scene):
         for ev in e:
             if type(ev) == sf.ResizeEvent:
                 self._setup_components()
+            elif type(ev) == sf.MouseButtonEvent and ev.released: # Player tries to place piece
+                if (not self.single_player or self.game.get_turn() == self.color) and self.game.winner() is None: # Check that you are allowed to play
+                    mpos = self.target.map_pixel_to_coords(sf.Mouse.get_position(self.target))
+                    for row in range(self.board_size):
+                        for col in range(self.board_size):
+                            bounds = self.board_tiles[row][col].global_bounds
+                            if bounds.contains(mpos):
+                                # Try to place piece
+                                try:
+                                    flipped = self.game.place(row, col)
+
+                                    piece = Piece(self.target, -self.game.get_turn())
+                                    piece.set_position(self._grid_position(row, col))
+                                    self.pieces[row][col] = piece
+                                    self.add_component(piece)
+
+                                    for pos in flipped:
+                                        self.pieces[pos[0]][pos[1]].flip()
+
+                                    self.msg.string = self.translation[self.game.get_turn()] + " ska spela"
+
+                                    self._setup_components()
+                                except:
+                                    pass
+                                break
+
+    def update(self, t):
+        super().update(t)
+
+        winner = self.game.winner()
+        if winner:
+            self.time += t
+            if winner[0] == 0:
+                self.msg.string = "Det blev oavgjort!"
+            else:
+                self.msg.string = self.translation[winner[0]] + " har vunnit med " + str(winner[1]) + " brickor!"
+            self._setup_components()
+
+            if self.time.seconds >= 3:
+                from interface.scene.mainmenu import MainMenu
+                return MainMenu(self.target)
 
     def _setup_components(self):
         size = self.target.size
@@ -201,3 +245,9 @@ class GameScene(Scene):
 
         return sprite
 
+    def _skip_pressed(self):
+        if not self.game.winner() is None or (self.single_player and self.game.get_turn() != self.color):
+            return
+
+        self.game.skip()
+        self.msg.string = self.translation[self.game.get_turn()] + " ska spela"
