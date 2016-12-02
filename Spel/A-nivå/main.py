@@ -30,7 +30,7 @@ while window.is_open:
 
     for event in window.events:
         if type(event) is sf.CloseEvent:
-            window.close();
+            window.close()
         else:
             events.append(event)
 
