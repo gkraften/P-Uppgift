@@ -180,9 +180,10 @@ class GameScene(Scene):
             else:
                 self.msg.string = self.translation[winner[0]] + " har vunnit med " + str(winner[1]) + " brickor!"
                 if Highscore.get_highscore() < winner[1]:
-                    Highscore.set_highscore(winner[1])
-                    Highscore.save(self.HIGHSCORE_PATH)
-                    self.highscore = True
+                    if self.single_player and winner[0] == self.color or not self.single_player:
+                        Highscore.set_highscore(winner[1])
+                        Highscore.save(self.HIGHSCORE_PATH)
+                        self.highscore = True
 
             if self.highscore:
                 if self.time.seconds >= 6:
