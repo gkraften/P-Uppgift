@@ -89,7 +89,7 @@ try:
             if flips is None:
                 print("Datorn hoppade över sin tur.")
             else:
-                print("Datorn har vänt %d pjäser." % len(flips))
+                print("Datorn har vänt %d pjäser." % (len(flips)-1))
 
         winner = game.winner()
 
