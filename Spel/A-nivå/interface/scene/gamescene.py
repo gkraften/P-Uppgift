@@ -7,12 +7,15 @@ from sfml import sf
 
 import reversi
 import reversi.bot
+from reversi.highscore import Highscore
 
 class GameScene(Scene):
     """Class that handles a game of reversi."""
 
     MSG_SCALE = 1/10
     SKIP_SCALE = 1/15
+
+    HIGHSCORE_PATH = assets.get_asset("/../highscore.txt")
 
     def __init__(self, target, size, single_player, color=None):
         """Instantiate GameScene. size is size of board,
@@ -29,6 +32,9 @@ class GameScene(Scene):
             self.translation = {color: "Du", -color: "Datorn"}
         else:
             self.translation = {reversi.WHITE: "Vit", reversi.BLACK: "Svart"}
+
+        Highscore.load(self.HIGHSCORE_PATH)
+        self.highscore = False
 
         self.board_size = size
 
@@ -173,11 +179,22 @@ class GameScene(Scene):
                 self.msg.string = "Det blev oavgjort!"
             else:
                 self.msg.string = self.translation[winner[0]] + " har vunnit med " + str(winner[1]) + " brickor!"
-            self._setup_components()
+                if Highscore.get_highscore() < winner[1]:
+                    Highscore.set_highscore(winner[1])
+                    Highscore.save(self.HIGHSCORE_PATH)
+                    self.highscore = True
 
-            if self.time.seconds >= 3:
+            if self.highscore:
+                if self.time.seconds >= 6:
+                    from interface.scene.mainmenu import MainMenu
+                    return MainMenu(self.target)
+                elif self.time.seconds >= 3:
+                    self.msg.string = "Nytt highscore dessutom!"
+            elif self.time.seconds >= 3:
                 from interface.scene.mainmenu import MainMenu
                 return MainMenu(self.target)
+
+            self._setup_components()
         elif self.single_player and self.game.get_turn() == -self.color:
             self.time += t
             if self.time.seconds >= 1:
