@@ -77,9 +77,9 @@ def display_board(b):
         print(index+1, end=" "*(n_digits - digits(index+1)) + " | ")
         for elem in row:
             if elem == reversi.WHITE:
-                print("v", end="")
+                print("○", end="")
             elif elem == reversi.BLACK:
-                print("s", end="")
+                print("●", end="")
             else:
                 print(" ", end="")
             print(" | ", end="")

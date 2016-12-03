@@ -18,7 +18,7 @@ import interface
 import time
 
 
-colors = {reversi.WHITE: "vit", reversi.BLACK: "svart"} # Table to translate colors into strings
+colors = {reversi.WHITE: "○", reversi.BLACK: "●"} # Table to translate colors into strings
 score_path = os.path.dirname(os.path.realpath(__file__)) + os.sep + "highscore.txt" # Path to high score file. Same directory as script
 player = reversi.WHITE
 

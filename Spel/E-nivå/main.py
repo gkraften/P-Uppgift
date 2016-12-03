@@ -15,7 +15,7 @@ from reversi.highscore import Highscore
 import interface
 
 
-colors = {reversi.WHITE: "vit", reversi.BLACK: "svart"} # Table to translate colors into strings
+colors = {reversi.WHITE: "○", reversi.BLACK: "●"} # Table to translate colors into strings
 
 print(r''' _______  _______           _______  _______  _______ _________
 (  ____ )(  ____ \|\     /|(  ____ \(  ____ )(  ____ \\__   __/
