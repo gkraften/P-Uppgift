@@ -13,6 +13,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)) + os.sep + "..")
 from sfml import sf
 
 from interface.scene.mainmenu import MainMenu
+from interface import assets
 
 WIDTH = 800
 HEIGHT = 600
@@ -23,6 +24,10 @@ settings.antialiasing_level = 8
 window = sf.RenderWindow(sf.VideoMode(WIDTH, HEIGHT), "Reversi", sf.Style.DEFAULT, settings)
 
 scene = MainMenu(window)
+
+music = sf.Music.from_file(assets.get_asset("/audio/othello.wav"))
+music.loop = True
+music.play()
 
 clock = sf.Clock()
 while window.is_open:
