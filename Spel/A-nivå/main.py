@@ -28,11 +28,14 @@ clock = sf.Clock()
 while window.is_open:
     events = []
 
-    for event in window.events:
-        if type(event) is sf.CloseEvent:
-            window.close()
-        else:
-            events.append(event)
+    try:
+        for event in window.events:
+            if type(event) is sf.CloseEvent:
+                window.close()
+            else:
+                events.append(event)
+    except UnboundLocalError: # Catch exception caused by bug in pysfml
+        pass
 
     scene.event(events)
 
