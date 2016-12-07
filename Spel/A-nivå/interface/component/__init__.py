@@ -16,7 +16,8 @@ class Component(ABC):
 
     def update(self, t):
         """Method called when component is allowed
-        to update itself."""
+        to update itself. t is the duration of the
+        main loop."""
 
         pass
 
